@@ -21,7 +21,7 @@ jobs:
       run: |
         echo ${{ steps.version.outputs.version }}      
     - name: Build the Docker image
-      run: docker build . --file src/web/Dockerfile --tag parsa-sample-helm:${{ steps.version.outputs.version }}
+      run: docker build . --file src/web/Dockerfile --tag ghcr.io/parsagachkar/parsa-sample-helm:${{ steps.version.outputs.version }}
     - name: Push the Docker image
       run: docker push ghcr.io/parsagachkar/parsa-sample-helm:${{ steps.version.outputs.version }}
 
