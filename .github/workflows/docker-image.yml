@@ -14,5 +14,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Git Version
+      id: version
+      uses: codacy/git-version@2.7.1    
+    - name: Use the version
+      run: |
+        echo ${{ steps.version.outputs.version }}      
     - name: Build the Docker image
-      run: docker build . --file src/web/Dockerfile --tag parsa-sample-helm:$(date +%s)
+      run: docker build . --file src/web/Dockerfile --tag parsa-sample-helm:${{ steps.version.outputs.version }}
+    - name: Push the Docker image
+      run: docker push ghcr.io/ParsaGachkar/ParsaSampleHelm:${{ steps.version.outputs.version }}
+
